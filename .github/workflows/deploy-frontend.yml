@@ -43,6 +43,7 @@ jobs:
         working-directory: my-blog
         env:
           VITE_API_URL: ${{ secrets.VITE_RENDER_BACKEND_URL || 'https://blog-backend-xxxx.onrender.com/api' }}
+          VITE_BASE: /Deity/
         run: npm run build
 
       - name: 设置 Pages
