@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: blog-backend
+    runtime: docker
+    rootDir: backend
+    plan: free
+    healthCheckPath: /api/articles
+    envVars:
+      - key: SERVER_PORT
+        value: "8080"
