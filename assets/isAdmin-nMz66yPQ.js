@@ -1,0 +1,1 @@
+function e(){return sessionStorage.getItem(`adminVerified`)===`true`}export{e as t};
