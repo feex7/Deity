@@ -1,8 +1,9 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { isAdmin } from '../utils/isAdmin.js'
+import { API_BASE } from '../api/config.js'
 
-const API = '/api/favorites'
+const API = `${API_BASE}/favorites`
 
 const favorites = ref([])
 const loading = ref(true)

@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { API_BASE } from '../api/config.js'
 
 const stats = ref({ projects: 0, articles: 0, plans: 0 })
 const statsLoading = ref(true)
@@ -34,7 +35,7 @@ const statsData = computed(() => [
 const fetchStats = async () => {
   statsLoading.value = true
   try {
-    const res = await fetch('/api/stats')
+    const res = await fetch(`${API_BASE}/stats`)
     if (res.ok) stats.value = await res.json()
   } catch (e) { console.error('统计加载失败:', e) }
   finally { statsLoading.value = false }
@@ -43,7 +44,7 @@ const fetchStats = async () => {
 const fetchVisitorStats = async () => {
   visitorLoading.value = true
   try {
-    const res = await fetch('/api/visitors/stats')
+    const res = await fetch(`${API_BASE}/visitors/stats`)
     if (res.ok) visitorStats.value = await res.json()
   } catch (e) { console.error('访问统计加载失败:', e) }
   finally { visitorLoading.value = false }
@@ -55,7 +56,7 @@ const trackVisitor = () => {
     visitorId = crypto.randomUUID()
     localStorage.setItem('visitorId', visitorId)
   }
-  fetch('/api/visitors/track', {
+  fetch(`${API_BASE}/visitors/track`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ visitorId })

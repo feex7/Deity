@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import * as echarts from 'echarts'
+import { API_BASE } from '../api/config.js'
 
 const STOCKS = ['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'NVDA']
 const STOCK_NAMES = {
@@ -62,8 +63,8 @@ const fetchAll = async () => {
   error.value = ''
   try {
     const [stockRes, goldRes] = await Promise.all([
-      fetch(`/api/market/stocks?symbols=${STOCKS.join(',')}&days=30&t=${Date.now()}`),
-      fetch(`/api/market/gold?days=90&t=${Date.now()}`)
+      fetch(`${API_BASE}/market/stocks?symbols=${STOCKS.join(',')}&days=30&t=${Date.now()}`),
+      fetch(`${API_BASE}/market/gold?days=90&t=${Date.now()}`)
     ])
     if (!stockRes.ok || !goldRes.ok) throw new Error('数据获取失败')
     stocksData.value = await stockRes.json()
@@ -79,7 +80,7 @@ const fetchAll = async () => {
 const refreshData = async () => {
   refreshing.value = true
   try {
-    await fetch('/api/market/refresh', { method: 'POST' })
+    await fetch(`${API_BASE}/market/refresh`, { method: 'POST' })
     await new Promise(r => setTimeout(r, 1500))
     await fetchAll()
   } catch (e) {

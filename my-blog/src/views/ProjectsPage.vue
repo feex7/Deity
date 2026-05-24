@@ -1,8 +1,9 @@
 <script setup>
 import { ref, onMounted, reactive } from 'vue'
 import { isAdmin } from '../utils/isAdmin.js'
+import { API_BASE } from '../api/config.js'
 
-const API = '/api/projects'
+const API = `${API_BASE}/projects`
 
 const items = ref([])
 const loading = ref(true)

@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { API_BASE } from '../api/config.js'
 
 const playlist = ref([])
 const currentIndex = ref(-1)
@@ -53,7 +54,7 @@ const initAudio = () => {
 
 const fetchPlaylist = async () => {
   try {
-    const res = await fetch('/api/music')
+    const res = await fetch(`${API_BASE}/music`)
     if (res.ok) {
       const data = await res.json()
       playlist.value = data
@@ -72,7 +73,7 @@ const play = (index) => {
   playError.value = false
   const song = playlist.value[index || 0]
   if (index !== undefined) currentIndex.value = index
-  audio.value.src = `/api/music/${song.id}/stream`
+  audio.value.src = `${API_BASE}/music/${song.id}/stream`
   audio.value.play().then(() => {
     isPlaying.value = true
     playError.value = false
@@ -149,7 +150,7 @@ const handleUpload = async (e) => {
     const form = new FormData()
     form.append('title', file.name.replace(/\.[^.]+$/, ''))
     form.append('file', file)
-    const res = await fetch('/api/music', { method: 'POST', body: form })
+    const res = await fetch(`${API_BASE}/music`, { method: 'POST', body: form })
     if (!res.ok) {
       const err = await res.json()
       throw new Error(err.error || '上传失败')
@@ -166,7 +167,7 @@ const handleUpload = async (e) => {
 const deleteSong = async (id) => {
   if (!confirm('确定删除这首歌曲？')) return
   try {
-    await fetch(`/api/music/${id}`, { method: 'DELETE' })
+    await fetch(`${API_BASE}/music/${id}`, { method: 'DELETE' })
     if (currentSong.value?.id === id) {
       audio.value?.pause()
       isPlaying.value = false

@@ -11,6 +11,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import authAPI from '../api/auth'
+import { API_BASE } from '../api/config.js'
 import { isAdmin } from '../utils/isAdmin.js'
 import MusicPlayer from '../components/MusicPlayer.vue'
 
@@ -267,7 +268,7 @@ const fetchMessages = async () => {
   guestLoading.value = true
   guestError.value = ''
   try {
-    const res = await fetch('/api/guestbook')
+    const res = await fetch(`${API_BASE}/guestbook`)
     if (!res.ok) throw new Error('加载失败')
     messages.value = await res.json()
   } catch (e) {
@@ -286,7 +287,7 @@ const submitMessage = async () => {
   if (content.length > 500) { guestFormError.value = '留言不能超过500个字符'; return }
   guestSubmitting.value = true
   try {
-    const res = await fetch('/api/guestbook', {
+    const res = await fetch(`${API_BASE}/guestbook`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nickname, content })
@@ -309,7 +310,7 @@ const submitMessage = async () => {
 
 const deleteMessage = async (id) => {
   try {
-    const res = await fetch(`/api/guestbook/${id}`, { method: 'DELETE' })
+    const res = await fetch(`${API_BASE}/guestbook/${id}`, { method: 'DELETE' })
     if (res.ok) {
       messages.value = messages.value.filter(m => m.id !== id)
     }

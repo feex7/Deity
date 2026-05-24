@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { API_BASE } from '../api/config.js'
 
 const router = useRouter()
 const items = ref([])
@@ -68,7 +69,7 @@ const fetchTimeline = async () => {
   loading.value = true
   error.value = ''
   try {
-    const res = await fetch('/api/timeline')
+    const res = await fetch(`${API_BASE}/timeline`)
     if (!res.ok) throw new Error('数据获取失败')
     items.value = await res.json()
   } catch (e) {

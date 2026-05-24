@@ -1,7 +1,8 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { API_BASE } from '../api/config.js'
 
-const API = '/api/hot-topics'
+const API = `${API_BASE}/hot-topics`
 const items = ref([])
 const loading = ref(true)
 const error = ref('')

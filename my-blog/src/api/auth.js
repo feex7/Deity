@@ -1,4 +1,5 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || '/api'
+import { API_BASE } from './config.js'
+const API_BASE_URL = API_BASE
 
 class AuthAPI {
   constructor() {

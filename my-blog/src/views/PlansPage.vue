@@ -2,8 +2,9 @@
 import { ref, onMounted, reactive } from 'vue'
 import { isAdmin } from '../utils/isAdmin.js'
 import TagInput from '../components/TagInput.vue'
+import { API_BASE } from '../api/config.js'
 
-const API = '/api/plans'
+const API = `${API_BASE}/plans`
 
 const items = ref([])
 const loading = ref(true)
