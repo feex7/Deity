@@ -525,6 +525,7 @@ const formatDate = (dateStr) => {
   padding: 0;
   background: none;
   border: none;
+  color: unset;
   font-size: 13px;
   line-height: 1.8;
 }
