@@ -1079,170 +1079,15 @@ export const toolbarButtons = [
 }
 
 /*
- * ======================== 6. 预览面板 + Markdown 渲染样式 ========================
+ * ======================== 6. 预览面板 ========================
+ * 注：Markdown 渲染样式已移至下方非 scoped <style> 块，以确保
+ *     v-html 注入的 highlight.js 语法高亮样式不被 scoped 覆盖。
  */
 .preview-content {
   flex: 1;
   padding: 20px;
   overflow-y: auto;
   background-color: #0d0d0d;
-}
-
-:deep(.preview-placeholder) {
-  color: rgba(255, 255, 255, 0.2) !important;
-  font-style: italic;
-  text-align: center;
-  padding-top: 60px;
-}
-
-/*
- * Markdown 渲染样式
- * 覆盖 marked 生成的 HTML 元素样式，匹配暗色主题
- */
-.markdown-body :deep(h1) {
-  font-size: 28px;
-  font-weight: 700;
-  color: #fff;
-  margin: 0 0 16px 0;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.markdown-body :deep(h2) {
-  font-size: 22px;
-  font-weight: 600;
-  color: #fff;
-  margin: 24px 0 12px 0;
-}
-
-.markdown-body :deep(h3) {
-  font-size: 18px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
-  margin: 20px 0 10px 0;
-}
-
-.markdown-body :deep(h4),
-.markdown-body :deep(h5),
-.markdown-body :deep(h6) {
-  font-size: 15px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.8);
-  margin: 16px 0 8px 0;
-}
-
-.markdown-body :deep(p) {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 14px;
-  line-height: 1.8;
-  margin: 0 0 14px 0;
-}
-
-.markdown-body :deep(a) {
-  color: #00ff80;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(0, 255, 128, 0.3);
-  transition: border-color 0.2s;
-}
-
-.markdown-body :deep(a:hover) {
-  border-bottom-color: #00ff80;
-}
-
-.markdown-body :deep(strong) {
-  color: #fff;
-  font-weight: 600;
-}
-
-.markdown-body :deep(em) {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.markdown-body :deep(code) {
-  padding: 2px 6px;
-  background-color: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 4px;
-  color: #00ff80;
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-  font-size: 13px;
-}
-
-.markdown-body :deep(pre) {
-  background-color: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
-  padding: 16px;
-  overflow-x: auto;
-  margin: 0 0 16px 0;
-}
-
-.markdown-body :deep(pre code) {
-  padding: 0;
-  background: none;
-  border: none;
-  color: unset;
-  font-size: 13px;
-  line-height: 1.7;
-}
-
-.markdown-body :deep(blockquote) {
-  margin: 0 0 16px 0;
-  padding: 8px 16px;
-  border-left: 3px solid #00ff80;
-  background-color: rgba(0, 255, 128, 0.03);
-  border-radius: 0 6px 6px 0;
-}
-
-.markdown-body :deep(blockquote p) {
-  color: rgba(255, 255, 255, 0.55);
-  margin: 4px 0;
-}
-
-.markdown-body :deep(ul),
-.markdown-body :deep(ol) {
-  padding-left: 24px;
-  margin: 0 0 14px 0;
-}
-
-.markdown-body :deep(li) {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 14px;
-  line-height: 1.8;
-}
-
-.markdown-body :deep(hr) {
-  border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  margin: 24px 0;
-}
-
-.markdown-body :deep(img) {
-  max-width: 100%;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  margin: 8px 0;
-}
-
-.markdown-body :deep(table) {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 0 0 16px 0;
-}
-
-.markdown-body :deep(th),
-.markdown-body :deep(td) {
-  padding: 8px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  text-align: left;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.markdown-body :deep(th) {
-  background-color: rgba(255, 255, 255, 0.03);
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 600;
 }
 
 /*
@@ -1511,5 +1356,165 @@ export const toolbarButtons = [
   .action-btn {
     justify-content: center;
   }
+}
+</style>
+
+<style>
+/*
+ * ================================================================
+ *          Markdown 渲染样式（非 scoped，确保 hljs 语法高亮生效）
+ * ================================================================
+ * 此块不使用 scoped，因为预览内容通过 v-html 动态注入 DOM，
+ * scoped 样式的高 specificity 会覆盖 highlight.js 的主题颜色。
+ */
+
+.preview-placeholder {
+  color: rgba(255, 255, 255, 0.2);
+  font-style: italic;
+  text-align: center;
+  padding-top: 60px;
+}
+
+.markdown-body h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.markdown-body h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #fff;
+  margin: 24px 0 12px 0;
+}
+
+.markdown-body h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 20px 0 10px 0;
+}
+
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 16px 0 8px 0;
+}
+
+.markdown-body p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  line-height: 1.8;
+  margin: 0 0 14px 0;
+}
+
+.markdown-body a {
+  color: #00ff80;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 255, 128, 0.3);
+  transition: border-color 0.2s;
+}
+
+.markdown-body a:hover {
+  border-bottom-color: #00ff80;
+}
+
+.markdown-body strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.markdown-body em {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.markdown-body code {
+  padding: 2px 6px;
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 13px;
+}
+
+.markdown-body pre {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 16px;
+  overflow-x: auto;
+  margin: 0 0 16px 0;
+}
+
+.markdown-body pre code {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.markdown-body blockquote {
+  margin: 0 0 16px 0;
+  padding: 8px 16px;
+  border-left: 3px solid #00ff80;
+  background-color: rgba(0, 255, 128, 0.03);
+  border-radius: 0 6px 6px 0;
+}
+
+.markdown-body blockquote p {
+  color: rgba(255, 255, 255, 0.55);
+  margin: 4px 0;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 24px;
+  margin: 0 0 14px 0;
+}
+
+.markdown-body li {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.markdown-body hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 24px 0;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  margin: 8px 0;
+}
+
+.markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 16px 0;
+}
+
+.markdown-body th,
+.markdown-body td {
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: left;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.markdown-body th {
+  background-color: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
 }
 </style>
