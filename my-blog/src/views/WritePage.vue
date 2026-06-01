@@ -215,8 +215,8 @@ const insertMarkdown = (syntax) => {
       cursorOffset = selected ? insertion.length : 1
       break
     case 'codeblock':
-      insertion = `${prefix}\`\`\`\n${selected || '代码块'}\n\`\`\``
-      cursorOffset = selected ? insertion.length : prefix.length + 1
+      insertion = `${prefix}\`\`\`js\n${selected || '// 在此编写代码...'}\n\`\`\``
+      cursorOffset = selected ? insertion.length : prefix.length + 5
       break
     case 'link':
       insertion = `[${selected || '链接文字'}](url)`
@@ -261,19 +261,6 @@ const insertMarkdown = (syntax) => {
 
 /*
  * ======================== Tab 键缩进支持 ========================
- * 在 textarea 中按下 Tab 时插入 2 个空格而非切换焦点
- */
-const handleTabKey = (e) => {
-  if (e.key === 'Tab') {
-    e.preventDefault()
-    insertMarkdown('indent')
-    // 覆盖 indent 为空格
-  }
-}
-
-/*
- * 手动处理 Tab 缩进（与 insertMarkdown 类似但逻辑独立）
- */
 const handleKeydown = (e) => {
   if (e.key === 'Tab') {
     e.preventDefault()
