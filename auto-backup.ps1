@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿$ErrorActionPreference = 'Continue'
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿$ErrorActionPreference = 'Continue'
 
 $BACKUP_DIR = 'D:\web_beifen'
 $DB_DIR = 'd:\blog01\backend\data'

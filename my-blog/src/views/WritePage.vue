@@ -1422,16 +1422,19 @@ export const toolbarButtons = [
 }
 
 .markdown-body code {
-  padding: 2px 6px;
-  background-color: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 4px;
+  padding: 3px 8px;
+  background-color: rgba(0, 255, 128, 0.08);
+  border: 1px solid rgba(0, 255, 128, 0.2);
+  border-radius: 6px;
+  color: #00ff80;
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
   font-size: 13px;
+  font-weight: 500;
 }
 
 .markdown-body pre {
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   padding: 16px;
   overflow-x: auto;
@@ -1442,8 +1445,11 @@ export const toolbarButtons = [
   padding: 0;
   border: none;
   border-radius: 0;
+  background: none;
+  color: inherit;
   font-size: 13px;
   line-height: 1.7;
+  font-weight: normal;
 }
 
 .markdown-body blockquote {
